@@ -9,15 +9,14 @@ import NavBar from "../components/NavBar.jsx";
 import Card from "../components/Card.jsx";
 import {answerGrouper} from "../utils/answerGrouper.jsx";
 import {formatForPieChart} from "../utils/pieChartFormatter.jsx";
+import {useAnswerOptions} from "../context/AnswerOptionContext.jsx";
 
 
 function Home() {
-    const [answerOptions, setAnswerOptions] = useState([]);
     const [surveyResponses, setSurveyResponses] = useState([]);
     const questionCount = countQuestionIds(surveyResponses)
+    const {answerOptions} = useAnswerOptions();
     useEffect(() => {
-        getAnswerOptions().then((data) => setAnswerOptions(data))
-            .catch((err) => alert(err));
         getSurveyResponses().then((data) => setSurveyResponses(data))
             .catch((err) => alert(err));
     }, [])
@@ -28,9 +27,10 @@ function Home() {
             <div className="flex flex-wrap gap-4 justify-center">
                 {  Object.keys(questionCount).map((questionId) => {
                 const selectedOptions = questionCount[questionId];
+                // console.log(formatForPieChart(answerGrouper(selectedOptions)));
                 return (
                     <Card key={questionId} title="Example">
-                        <MyPieChart data={formatForPieChart(answerGrouper(selectedOptions))} />
+                        <MyPieChart data={formatForPieChart(answerGrouper(selectedOptions),answerOptions)} />
                     </Card>)
             })}
             </div>
