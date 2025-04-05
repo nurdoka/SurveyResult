@@ -8,6 +8,7 @@ import Regions from "./pages/Regions.jsx";
 import {LanguageProvider} from "./context/LanguageContext.jsx";
 import Counties from "./pages/Counties.jsx";
 import {AnswerOptionsProvider} from "./context/AnswerOptionContext.jsx";
+import {QuestionsProvider} from "./context/QuestionContext.jsx";
 
 function Logout() {
     localStorage.clear()
@@ -17,38 +18,40 @@ function Logout() {
 function App() {
     return (
         <LanguageProvider>
-            <AnswerOptionsProvider>
-                <BrowserRouter>
-                    <Routes>
-                        <Route
-                            path="/"
-                            element={
-                                <ProtectedRoute>
-                                    <Home/>
-                                </ProtectedRoute>
-                            }
-                        ></Route>
-                        <Route
-                            path="/regions"
-                            element={
-                                <ProtectedRoute>
-                                    <Regions/>
-                                </ProtectedRoute>
-                            }
-                        ></Route>
-                        <Route
-                            path="/counties"
-                            element={
-                                <ProtectedRoute>
-                                    <Counties/>
-                                </ProtectedRoute>
-                            }
-                        ></Route>
-                        <Route path="/login" element={<Login/>}/>
-                        <Route path="/*" element={<NotFound/>}/>
-                    </Routes>
-                </BrowserRouter>
-            </AnswerOptionsProvider>
+            <QuestionsProvider>
+                <AnswerOptionsProvider>
+                    <BrowserRouter>
+                        <Routes>
+                            <Route
+                                path="/"
+                                element={
+                                    <ProtectedRoute>
+                                        <Home/>
+                                    </ProtectedRoute>
+                                }
+                            ></Route>
+                            <Route
+                                path="/regions"
+                                element={
+                                    <ProtectedRoute>
+                                        <Regions/>
+                                    </ProtectedRoute>
+                                }
+                            ></Route>
+                            <Route
+                                path="/counties"
+                                element={
+                                    <ProtectedRoute>
+                                        <Counties/>
+                                    </ProtectedRoute>
+                                }
+                            ></Route>
+                            <Route path="/login" element={<Login/>}/>
+                            <Route path="/*" element={<NotFound/>}/>
+                        </Routes>
+                    </BrowserRouter>
+                </AnswerOptionsProvider>
+            </QuestionsProvider>
         </LanguageProvider>
     )
 }
