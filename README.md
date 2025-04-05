@@ -24,7 +24,8 @@ A dynamic frontend application that visualizes survey results collected from cou
 - **PostgreSQL Database:** Used for storing and managing data related to customers and vehicles.
 - **React:** Employed for building the front-end portion of the application, including components, models, services, and routing.
 - **Tailwind CSS:** Used to enhance the visual appeal and responsiveness of the front-end.
-- **Rechart:** Used to enhance the visual appeal and show data in a more visual way.
+- **Recharts,Chart.js:** Used for interactive data visualizations and diagrams.
+- **Vite:** For fast develpment and build tooling
 ## Contributors
 
 - **Nurdoolot Aitaliev:** 
