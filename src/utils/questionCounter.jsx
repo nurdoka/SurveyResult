@@ -14,6 +14,6 @@ export const countQuestionIds = (responses) => {
         }
     }
 
-    console.log("groupedResponses", groupedResponses);
+    // console.log("groupedResponses", groupedResponses);
     return groupedResponses;
 };
