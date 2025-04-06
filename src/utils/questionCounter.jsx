@@ -1,14 +1,19 @@
 export const countQuestionIds = (responses) => {
-    const groupedResponses = responses.reduce((acc, response) => {
-        // Check if the questionId already exists in the accumulator
-        if (!acc[response.question]) {
-            acc[response.question] = [];
+    const groupedResponses = [];
+
+    for (let i = 0; i < responses.length; i++) {
+        const questionId = responses[i].question;
+        const selectedOption = responses[i].selected_option;
+
+        const existingGroup = groupedResponses.find(item => item.question === questionId);
+
+        if (!existingGroup) {
+            groupedResponses.push({ question: questionId, answers: [selectedOption] });
+        } else if(selectedOption){
+            existingGroup.answers.push(selectedOption);
         }
-        // Push the selected_option for each questionId
-        acc[response.question].push(response.selected_option);
-        return acc;
-    }, {});
-    console.log(groupedResponses);
-    // Return the grouped responses
+    }
+
+    console.log("groupedResponses", groupedResponses);
     return groupedResponses;
 };
