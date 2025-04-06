@@ -24,6 +24,5 @@ export const countQuestionIds = (responses) => {
             if (customAnswer) existingGroup.customAnswers.push(customAnswer);
         }
     }
-
     return groupedResponses;
 };
