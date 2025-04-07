@@ -1,5 +1,5 @@
 import {Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/react'
-import {Bars3Icon, BellIcon, XMarkIcon} from '@heroicons/react/24/outline'
+import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
 import logo from '../assets/logo.png'
 import {useNavigate} from "react-router-dom";
 import {useLanguage} from "../context/LanguageContext.jsx";
@@ -8,7 +8,7 @@ const navigation = [
     {name: 'Dashboard', href: '/', current: true},
     {name: 'Regions', href: '/regions', current: false},
     {name: 'Counties', href: 'counties', current: false},
-    {name: 'Calendar', href: '#', current: false},
+    {name: 'Other', href: '#', current: false},
 ]
 
 function classNames(...classes) {

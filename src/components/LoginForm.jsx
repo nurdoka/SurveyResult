@@ -25,9 +25,9 @@ function LoginForm({route, method}) {
             }
         }
         catch (error) {
-            alert(error)
+            console.log(error);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
     };
 

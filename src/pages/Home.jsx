@@ -18,8 +18,9 @@ function Home() {
     const {questions} = useQuestions();
     const {language} = useLanguage();
     useEffect(() => {
+        document.title = "Dashboard";
         getSurveyResponses().then((data) => setSurveyResponses(data))
-            .catch((err) => alert(err));
+            .catch((err) => console.log(err));
     }, []);
 
     const questionCount = countQuestionIds(surveyResponses);
@@ -27,21 +28,23 @@ function Home() {
     return (
         <>
             <NavBar/>
-            <div className="w-full flex flex-wrap gap-8 justify-center ">
+            <div className="flex flex-wrap gap-4 justify-center">
                 {questionCount.map((questionEach) => {
                     const selectedOptions = questionEach.selectedOptions;
                     const title = questions.find(q => q.id === questionEach.question);
                     return (
-                            selectedOptions.length > 0 ?
-                            <Card key={questionEach.question} title={language === "ru" ? title.text_ru : title.text_kg} >
-                                <MyPieChart data={formatForPieChart(answerGrouper(selectedOptions), answerOptions)}/>
-                            </Card> : null
-
-                    )
+                        selectedOptions.length > 0 ? (
+                            <Card key={questionEach.question} title={language === "ru" ? title.text_ru : title.text_kg}>
+                                <MyPieChart data={formatForPieChart(answerGrouper(selectedOptions), answerOptions)} />
+                            </Card>
+                        ) : null
+                    );
                 })}
             </div>
         </>
-    )
+    );
+
+
 }
 
 export default Home
