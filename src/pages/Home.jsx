@@ -9,34 +9,38 @@ import {answerGrouper} from "../utils/answerGrouper.jsx";
 import {formatForPieChart} from "../utils/pieChartFormatter.jsx";
 import {useAnswerOptions} from "../context/AnswerOptionContext.jsx";
 import {useQuestions} from "../context/QuestionContext.jsx";
+import {useLanguage} from "../context/LanguageContext.jsx";
 
 
 function Home() {
     const [surveyResponses, setSurveyResponses] = useState([]);
-    const questionCount = countQuestionIds(surveyResponses)
     const {answerOptions} = useAnswerOptions();
     const {questions} = useQuestions();
+    const {language} = useLanguage();
     useEffect(() => {
         getSurveyResponses().then((data) => setSurveyResponses(data))
             .catch((err) => alert(err));
-    }, [])
+    }, []);
+
+    const questionCount = countQuestionIds(surveyResponses);
+
     return (
-        <div className="w-full">
+        <>
             <NavBar/>
-            {/*<div className="w-full flex flex-wrap gap-8 justify-center ">*/}
-            {/*    {Object.keys(questionCount).map((questionId) => {*/}
-            {/*        const selectedOptions = questionCount[questionId];*/}
-            {/*        const title = questions[questionId-1].text_ru;*/}
-            {/*        return (*/}
+            <div className="w-full flex flex-wrap gap-8 justify-center ">
+                {questionCount.map((questionEach) => {
+                    const selectedOptions = questionEach.selectedOptions;
+                    const title = questions.find(q => q.id === questionEach.question);
+                    return (
+                            selectedOptions.length > 0 ?
+                            <Card key={questionEach.question} title={language === "ru" ? title.text_ru : title.text_kg} >
+                                <MyPieChart data={formatForPieChart(answerGrouper(selectedOptions), answerOptions)}/>
+                            </Card> : null
 
-            {/*                <Card key={questionId} title={title} >*/}
-            {/*                    <MyPieChart data={formatForPieChart(answerGrouper(selectedOptions), answerOptions)}/>*/}
-            {/*                </Card>*/}
-
-            {/*        )*/}
-            {/*    })}*/}
-            {/*</div>*/}
-        </div>
+                    )
+                })}
+            </div>
+        </>
     )
 }
 
