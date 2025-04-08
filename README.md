@@ -26,6 +26,7 @@ A dynamic frontend application that visualizes survey results collected from cou
 - **Tailwind CSS:** Used to enhance the visual appeal and responsiveness of the front-end.
 - **Recharts,Chart.js:** Used for interactive data visualizations and diagrams.
 - **Vite:** For fast develpment and build tooling
+- **Axios:** Used for simplifying network communication with features like automatic JSON handling and request/response interception.
 ## Contributors
 
 - **Nurdoolot Aitaliev:** 
